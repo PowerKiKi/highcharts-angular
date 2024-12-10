@@ -10,7 +10,7 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(BrowserModule),
     provideHttpClient(withInterceptorsFromDi(), withFetch()),
     provideHighCharts({
-      instance: () => import('highcharts').then(m => m.default),
+      instance: () => import('highcharts/es-modules/masters/highcharts.src').then(m => m.default),
       options: {
         title: {
           style: {
@@ -24,9 +24,10 @@ export const appConfig: ApplicationConfig = {
       // The modules will work for all charts.
       modules: () => {
         return [
-          import('highcharts/modules/accessibility'),
-          import('highcharts/modules/exporting'),
-          import('highcharts/themes/sunset')
+          import('highcharts/es-modules/masters/highcharts-more.src'),
+          import('highcharts/es-modules/masters/modules/accessibility.src'),
+          import('highcharts/es-modules/masters/modules/exporting.src'),
+          import('highcharts/es-modules/masters/themes/sunset.src')
         ]
       }
     })

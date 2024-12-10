@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HighchartsChartComponent, providePartialHighChart } from 'highcharts-angular';
+import type HighchartsESM from 'highcharts/es-modules/masters/highcharts.src';
 
 @Component({
   selector: 'app-line-chart',
@@ -30,7 +31,7 @@ export class LineChartComponent {
       }]
     }
   `;
-  public optFromInput: Highcharts.Options = JSON.parse(this.optFromInputString);
+  public optFromInput: HighchartsESM.Options = JSON.parse(this.optFromInputString);
   private seriesTypes = {
     line: 'column',
     column: 'scatter',
@@ -39,7 +40,7 @@ export class LineChartComponent {
   };
 
   // Demonstrate chart instance
-  public logChartInstance(chart: Highcharts.Chart) {
+  public logChartInstance(chart: HighchartsESM.Chart) {
     if (chart) {
       console.log('Chart instance received:', chart);
     } else {

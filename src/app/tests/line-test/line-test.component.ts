@@ -3,7 +3,7 @@ import type HighchartsESM from 'highcharts/es-modules/masters/highcharts.src';
 import { HighchartsChartComponent } from '../../../../highcharts-angular/src/public_api';
 
 interface ExtendedSeriesCandlestickOptions extends HighchartsESM.SeriesCandlestickOptions {
-  color: Highcharts.ColorType;
+  color: HighchartsESM.ColorType;
 }
 
 @Component({
@@ -15,8 +15,8 @@ interface ExtendedSeriesCandlestickOptions extends HighchartsESM.SeriesCandlesti
 })
 export class LineTestComponent {
   updateFlag = false;
-  chartInstance: Highcharts.Chart;
-  chartOptions: Highcharts.Options = {
+  chartInstance: HighchartsESM.Chart;
+  chartOptions: HighchartsESM.Options = {
     series: [
       {
         type: 'line',

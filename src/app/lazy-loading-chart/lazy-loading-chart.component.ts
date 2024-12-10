@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import type Highcharts from 'highcharts';
+import type HighchartsESM from 'highcharts/es-modules/masters/highcharts.src';
 import { AppleDataService } from '../apple-data.service'
 import { Observable } from 'rxjs';
 import { HighchartsChartComponent, providePartialHighChart } from 'highcharts-angular';
 
 
-interface ExtendedPlotCandlestickDataGroupingOptions extends Highcharts.DataGroupingOptionsObject {
+interface ExtendedPlotCandlestickDataGroupingOptions extends HighchartsESM.DataGroupingOptionsObject {
   enabled: boolean
 }
 
@@ -14,16 +14,16 @@ interface ExtendedPlotCandlestickDataGroupingOptions extends Highcharts.DataGrou
   templateUrl: './lazy-loading-chart.component.html',
   styleUrls: ['./lazy-loading-chart.component.css'],
   imports: [HighchartsChartComponent],
-  providers: [providePartialHighChart({ modules: () => [import('highcharts/modules/stock')] })],
+  providers: [providePartialHighChart({ modules: () => [import('highcharts/es-modules/masters/modules/stock.src')] })],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LazyLoadingChartComponent {
 
   constructor(private appleDataService: AppleDataService) { }
 
-  chartRef: Highcharts.Chart;
+  chartRef: HighchartsESM.Chart;
 
-  chartCallback: Highcharts.ChartCallbackFunction = (chart) => {
+  chartCallback: HighchartsESM.ChartCallbackFunction = (chart) => {
     this.chartRef = chart;
   };
 
@@ -35,7 +35,7 @@ export class LazyLoadingChartComponent {
     return this.appleDataService.fetchSqlData(min, max);
   }
 
-  chartLazyLoading: Highcharts.Options = {
+  chartLazyLoading: HighchartsESM.Options = {
     chart: {
       type: 'candlestick',
       zooming: {

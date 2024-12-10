@@ -7,11 +7,11 @@ export type InstanceFactoryFunction = () => Promise<Chart['highcharts']>;
 
 export interface ModuleFactory {
   Highcharts?: Chart['highcharts'],
-  default?: (highcharts: Chart['highcharts']) => void
+  default?: unknown,
 }
 
 export interface Chart {
-  options: Highcharts.Options | HighchartsESM.Options,
+  options: HighchartsESM.Options,
   update?: boolean,
   highcharts?: typeof HighchartsESM
   constructorChart?: Function;

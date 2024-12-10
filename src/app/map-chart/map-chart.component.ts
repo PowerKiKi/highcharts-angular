@@ -1,26 +1,22 @@
 import {HttpClient} from '@angular/common/http';
 import {ChangeDetectionStrategy, Component, inject, computed} from '@angular/core';
 import {toSignal} from '@angular/core/rxjs-interop';
-import type Highcharts from 'highcharts';
+import type HighchartsESM from 'highcharts/es-modules/masters/highcharts.src';
 import { HighchartsChartComponent, providePartialHighChart } from 'highcharts-angular';
-// import proj4 from 'proj4';
-
-// Legacy way of map loading - see file at the path for more info.
-// require('../../js/worldmap')(Highcharts);
 
 @Component({
   selector: 'app-map-chart',
   templateUrl: './map-chart.component.html',
   styleUrls: ['./map-chart.component.css'],
   imports: [HighchartsChartComponent],
-  providers: [providePartialHighChart({ modules: () => [import('highcharts/modules/map')] })],
+  providers: [providePartialHighChart({ modules: () => [import('highcharts/es-modules/masters/modules/map.src')] })],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 export class MapChartComponent {
   private http = inject(HttpClient);
   worldMap = toSignal(this.http.get<any>('/highcharts/world.geo.json'));
-  chartMap = computed<Highcharts.Options>(() => {
+  chartMap = computed<HighchartsESM.Options>(() => {
     return {
       chart: {
         map: this.worldMap(),
@@ -272,7 +268,7 @@ export class MapChartComponent {
           ['kg', 211],
           ['np', 212]
         ]
-      } as Highcharts.SeriesMapOptions,
+      } as HighchartsESM.SeriesMapOptions,
         {
           // Specify points using lat/lon
           type: 'mappoint',
@@ -298,7 +294,7 @@ export class MapChartComponent {
               lon: -114.3718
             }
           ]
-        } as Highcharts.SeriesMappointOptions]
+        } as HighchartsESM.SeriesMappointOptions]
     }
   })
 

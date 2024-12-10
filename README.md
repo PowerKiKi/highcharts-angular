@@ -77,9 +77,9 @@ export const appConfig: ApplicationConfig = {
       // Modules for additional functionality
       modules: () => {
         return [
-          import('highcharts/modules/accessibility'),
-          import('highcharts/modules/exporting'),
-          import('highcharts/themes/sunset')
+          import('highcharts/es-modules/masters/modules/accessibility.src'),
+          import('highcharts/es-modules/masters/modules/exporting.src'),
+          import('highcharts/es-modules/masters/themes/sunset.src')
         ]
       }
     })
@@ -326,9 +326,9 @@ import { HighchartsChartDirective } from 'highcharts-angular';
       modules: () => {
         return [
           // Load Gantt Chart 
-          import('highcharts/modules/gantt'),
+          import('highcharts/es-modules/masters/modules/gantt.src'),
           // Load core module
-          import('highcharts/modules/exporting'),
+          import('highcharts/es-modules/masters/modules/exporting.src'),
           // Load plugins
           import('highcharts-custom-events'),
         ]
@@ -360,7 +360,7 @@ import { HighchartsChartDirective } from 'highcharts-angular';
   `,
   styles: [`.chart { width: 100%; height: 400px; display: block; }`],
   imports: [HighchartsChartDirective],
-  providers: [providePartialHighChart({ modules: () => [import('highcharts/modules/map')] })],
+  providers: [providePartialHighChart({ modules: () => [import('highcharts/es-modules/masters/modules/map.src')] })],
 })
 export class MapComponent {
   chartOptions: Highcharts.Options = {
@@ -384,7 +384,7 @@ import { HighchartsChartDirective } from 'highcharts-angular';
   `,
   styles: [`.chart { width: 100%; height: 400px; display: block; }`],
   imports: [HighchartsChartDirective],
-  providers: [providePartialHighChart({ modules: () => [import('highcharts/modules/stock')] })],
+  providers: [providePartialHighChart({ modules: () => [import('highcharts/es-modules/masters/modules/stock.src')] })],
 })
 export class StockComponent {
   chartOptions: Highcharts.Options = {

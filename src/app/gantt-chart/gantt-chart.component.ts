@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { HighchartsChartComponent, providePartialHighChart } from 'highcharts-angular';
+import type HighchartsESM from 'highcharts/es-modules/masters/highcharts.src';
 
 
 @Component({
@@ -7,11 +8,11 @@ import { HighchartsChartComponent, providePartialHighChart } from 'highcharts-an
   templateUrl: './gantt-chart.component.html',
   styleUrls: ['./gantt-chart.component.css'],
   imports: [HighchartsChartComponent],
-  providers: [providePartialHighChart({ modules: () => [import('highcharts/modules/gantt')] })],
+  providers: [providePartialHighChart({ modules: () => [import('highcharts/es-modules/masters/modules/gantt.src')] })],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GanttChartComponent {
-  chartGantt: Highcharts.Options = {
+  chartGantt: HighchartsESM.Options = {
     title: {
       text: 'Highcharts Gantt with Progress Indicators'
     },

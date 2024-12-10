@@ -1,19 +1,22 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import type Highcharts from 'highcharts';
+import type HighchartsESM from 'highcharts/es-modules/masters/highcharts.src';
 import { FormsModule } from '@angular/forms';
 import { HighchartsChartComponent, providePartialHighChart } from 'highcharts-angular';
 
-
-// Alternative way of a plugin loading:
-// const HC_ce = require('highcharts-custom-events');
-// HC_ce(Highcharts);
 
 @Component({
   selector: 'app-stock-chart',
   templateUrl: './stock-chart.component.html',
   styleUrls: ['./stock-chart.component.css'],
   imports: [FormsModule, HighchartsChartComponent],
-  providers: [providePartialHighChart({ modules: () => [import('highcharts/modules/stock'), import('highcharts-custom-events')] })],
+  providers: [
+    providePartialHighChart({
+      modules: () => [
+        import('highcharts/es-modules/masters/modules/stock.src'),
+        import('highcharts-custom-events'),
+      ]
+    })
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StockChartComponent {
@@ -65,8 +68,8 @@ export class StockChartComponent {
           [3, 10, -3, 3]
         ]
       }]
-    } as Highcharts.Options,
-    hcCallback: (chart: Highcharts.Chart) => {
+    } as HighchartsESM.Options,
+    hcCallback: (chart: HighchartsESM.Chart) => {
       console.log('some variables: ', chart, this.charts);
     }
   }, {
@@ -85,7 +88,7 @@ export class StockChartComponent {
           [3, 10, -3, 3]
         ]
       }]
-    } as Highcharts.Options,
+    } as HighchartsESM.Options,
     hcCallback: () => {}
   }, {
     hcOptions: {
@@ -104,7 +107,7 @@ export class StockChartComponent {
           0
         ]
       }]
-    } as Highcharts.Options,
+    } as HighchartsESM.Options,
     hcCallback: () => {}
   }];
 

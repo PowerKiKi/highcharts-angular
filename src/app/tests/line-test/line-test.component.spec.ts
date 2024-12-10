@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideHighCharts } from '../../../../highcharts-angular/src/public_api';
 import { LineTestComponent } from './line-test.component';
+import type HighchartsESM from 'highcharts/es-modules/masters/highcharts.src';
 
 describe('LineTestComponent', () => {
   let component: LineTestComponent;
@@ -33,7 +34,7 @@ describe('LineTestComponent', () => {
     // Simulate the chartInstance being assigned (this happens when the chart is rendered)
     component.chartInstance = {
       series: [{yData: [1, 2, 3]}],
-    } as unknown as Highcharts.Chart;
+    } as unknown as HighchartsESM.Chart;
 
     const series = component.chartInstance.series[0];
     expect((series as any).yData).toEqual((chartOptions.series[0] as any).data);
@@ -49,11 +50,11 @@ describe('LineTestComponent', () => {
 
   it('should be properly updated', () => {
     // Simulate the chartInstance and a mock series
-    const mockSeries = { color: 'hotpink' } as unknown as Highcharts.Series;
+    const mockSeries = { color: 'hotpink' } as unknown as HighchartsESM.Series;
 
     component.chartInstance = {
       series: [mockSeries],
-    } as unknown as Highcharts.Chart;
+    } as unknown as HighchartsESM.Chart;
 
     // Perform the color update
     component.updateSeriesColor();
@@ -64,7 +65,7 @@ describe('LineTestComponent', () => {
   });
 
   it('should bind chart instance when Highcharts chart emits instance', () => {
-    const mockChartInstance = {} as Highcharts.Chart;
+    const mockChartInstance = {} as HighchartsESM.Chart;
     component.chartInstance = mockChartInstance;
 
     expect(component.chartInstance).toBe(mockChartInstance);

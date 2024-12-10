@@ -18,6 +18,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { HighchartsChartService } from './highcharts-chart.service';
 import { HIGHCHARTS_CONFIG } from './highcharts-chart.token';
 import type { Chart, ChartConstructorType } from './types';
+import HighchartsESM from 'highcharts/es-modules/masters/highcharts.src';
 
 
 @Directive({
@@ -32,7 +33,7 @@ export class HighchartsChartDirective {
   /**
    * Callback function for the chart.
    */
-  callbackFunction = input<Highcharts.ChartCallbackFunction>(null);
+  callbackFunction = input<HighchartsESM.ChartCallbackFunction>(null);
 
   /**
    * When enabled, Updates `series`, `xAxis`, `yAxis`, and `annotations` to match new options.
@@ -53,7 +54,7 @@ export class HighchartsChartDirective {
    */
   update = model<boolean>();
 
-  chartInstance: OutputEmitterRef<Highcharts.Chart | null> = output<Highcharts.Chart | null>();  // #26
+  chartInstance: OutputEmitterRef<HighchartsESM.Chart | null> = output<HighchartsESM.Chart | null>();  // #26
 
   private destroyRef = inject(DestroyRef);
 
@@ -76,7 +77,7 @@ export class HighchartsChartDirective {
     return undefined;
   });
 
-  private chart = linkedSignal<Chart, Highcharts.Chart | null>({
+  private chart = linkedSignal<Chart, HighchartsESM.Chart | null>({
     source: () => ({options: this.options(), update: this.update(), constructorChart: this.constructorChart()}),
     computation: (source, previous) => {
       return untracked(() => this.createOrUpdateChart(source, previous?.value, this.oneToOne(), this.callbackFunction()));
@@ -85,10 +86,10 @@ export class HighchartsChartDirective {
 
   private createOrUpdateChart(
     source: Chart,
-    chart: Highcharts.Chart,
+    chart: HighchartsESM.Chart,
     oneToOne: boolean,
-    callbackFunction: Highcharts.ChartCallbackFunction
-  ): Highcharts.Chart | null {
+    callbackFunction: HighchartsESM.ChartCallbackFunction
+  ): HighchartsESM.Chart | null {
     if (chart) {
       chart.update(source.options, true, oneToOne);
       return chart;
